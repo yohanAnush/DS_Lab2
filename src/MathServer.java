@@ -26,16 +26,37 @@ public class MathServer extends UnicastRemoteObject implements MathService{
  
  
     public int multiply(int a, int b) throws RemoteException {
-System.out.println("Multiplying " + a + " and " + b + " in the Server");
+        System.out.println("Multiplying " + a + " and " + b + " in the Server");
         return a*b;
     }
  
  
     public int divide(int a, int b) throws RemoteException {
-System.out.println("Dividing " + a + " and " + b + " in the Server");
+        System.out.println("Dividing " + a + " and " + b + " in the Server");
 
-        return a/b; //check for division with zero here!
+        // checking for division by zero.
+        if (b == 0) {
+            System.out.println("Division by zero; throwing exception.");
+            throw new IllegalArgumentException("Divisor (i.e: 2nd argument) can not be 0.");
+        }
+
+        return a/b; //check for division with zero here! => Checked above.
     }
+
+
+    // added by IT16032798.
+    public double squareRoot(double number) throws RemoteException {
+        System.out.println("Getting square root of " + number + " in the Server");
+        return Math.sqrt(number);
+
+    }
+
+    public double square(double number) throws RemoteException {
+        System.out.println("Getting square of " + number + " in the Server");
+        return Math.pow(number, 2);
+
+    }
+    // end.
  
     public static void main(String[] args){
         if (System.getSecurityManager() == null)
